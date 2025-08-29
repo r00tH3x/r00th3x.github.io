@@ -100,6 +100,22 @@
             transform: translateY(-2px);
         }
 
+        .language-toggle {
+            background: var(--bg-card);
+            border: 2px solid var(--border);
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        .language-toggle:hover {
+            border-color: var(--accent-primary);
+        }
+
         .theme-toggle {
             background: none;
             border: 2px solid var(--border);
@@ -470,14 +486,20 @@
         <div class="nav-container">
             <div class="logo">r00tH3x</div>
             <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#tools">Tools</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#home" data-lang-en="Home" data-lang-id="Beranda">Beranda</a></li>
+                <li><a href="#tools" data-lang-en="Tools" data-lang-id="Tools">Tools</a></li>
+                <li><a href="#about" data-lang-en="About" data-lang-id="Tentang">Tentang</a></li>
+                <li><a href="#contact" data-lang-en="Contact" data-lang-id="Kontak">Kontak</a></li>
             </ul>
-            <button class="theme-toggle" id="themeToggle">
-                <i class="fas fa-moon" id="themeIcon"></i>
-            </button>
+            <div style="display: flex; gap: 1rem; align-items: center;">
+                <select class="language-toggle" id="languageToggle">
+                    <option value="id">🇮🇩 ID</option>
+                    <option value="en">🇺🇸 EN</option>
+                </select>
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon" id="themeIcon"></i>
+                </button>
+            </div>
         </div>
     </nav>
 
@@ -485,19 +507,18 @@
     <section class="hero" id="home">
         <div class="hero-content fade-in">
             <h1 class="hero-title">r00tH3x</h1>
-            <h2 class="hero-subtitle">Cybersecurity Arsenal</h2>
-            <p class="hero-description">
-                Professional-grade cybersecurity tools for penetration testing, vulnerability assessment, and security research. 
-                Built by security professionals, for security professionals.
+            <h2 class="hero-subtitle" data-lang-en="Cybersecurity Enthusiast" data-lang-id="Cybersecurity Antusias">Cybersecurity Antusias</h2>
+            <p class="hero-description" data-lang-en="Professional-grade cybersecurity tools for penetration testing, vulnerability assessment, and security research. Built by security professionals, for security professionals." data-lang-id="Tools cybersecurity tingkat profesional untuk penetration testing, vulnerability assessment, dan security research. Dibuat oleh security professionals, untuk security professionals.">
+                Tools cybersecurity tingkat profesional untuk penetration testing, vulnerability assessment, dan security research. Dibuat oleh security professionals, untuk security professionals.
             </p>
             <div class="cta-buttons">
                 <a href="#tools" class="btn btn-primary">
                     <i class="fas fa-tools"></i>
-                    Explore Tools
+                    <span data-lang-en="Explore Tools" data-lang-id="Jelajahi Tools">Jelajahi Tools</span>
                 </a>
                 <a href="https://github.com/r00tH3x" target="_blank" class="btn btn-secondary">
                     <i class="fab fa-github"></i>
-                    View on GitHub
+                    <span data-lang-en="View on GitHub" data-lang-id="Lihat di GitHub">Lihat di GitHub</span>
                 </a>
             </div>
         </div>
@@ -505,9 +526,9 @@
 
     <!-- Tools Section -->
     <section class="tools-section" id="tools">
-        <h2 class="section-title">Security Tools</h2>
-        <p class="section-description">
-            Comprehensive suite of cybersecurity tools designed for professionals and researchers
+        <h2 class="section-title" data-lang-en="Security Tools" data-lang-id="Security Tools">Security Tools</h2>
+        <p class="section-description" data-lang-en="Comprehensive suite of cybersecurity tools designed for professionals and researchers" data-lang-id="Kumpulan lengkap tools cybersecurity yang dirancang untuk profesional dan peneliti">
+            Kumpulan lengkap tools cybersecurity yang dirancang untuk profesional dan peneliti
         </p>
         
         <div class="tools-grid">
@@ -517,23 +538,23 @@
                     <i class="fas fa-wifi"></i>
                 </div>
                 <h3 class="tool-title">WiFury</h3>
-                <p class="tool-description">
-                    Advanced Wi-Fi security testing and penetration testing toolkit for wireless network assessment.
+                <p class="tool-description" data-lang-en="Advanced Wi-Fi security testing and penetration testing toolkit for wireless network assessment." data-lang-id="Toolkit canggih untuk Wi-Fi security testing dan penetration testing untuk assessment jaringan wireless.">
+                    Toolkit canggih untuk Wi-Fi security testing dan penetration testing untuk assessment jaringan wireless.
                 </p>
                 <ul class="tool-features">
-                    <li>WPA/WPA2 Security Testing</li>
-                    <li>Wireless Network Scanning</li>
-                    <li>Access Point Analysis</li>
-                    <li>Automated Attack Vectors</li>
+                    <li data-lang-en="WPA/WPA2 Security Testing" data-lang-id="WPA/WPA2 Security Testing">WPA/WPA2 Security Testing</li>
+                    <li data-lang-en="Wireless Network Scanning" data-lang-id="Wireless Network Scanning">Wireless Network Scanning</li>
+                    <li data-lang-en="Access Point Analysis" data-lang-id="Access Point Analysis">Access Point Analysis</li>
+                    <li data-lang-en="Automated Attack Vectors" data-lang-id="Automated Attack Vectors">Automated Attack Vectors</li>
                 </ul>
                 <div class="tool-links">
                     <a href="https://github.com/r00tH3x/WiFury" target="_blank">
                         <i class="fab fa-github"></i>
-                        Source Code
+                        <span data-lang-en="Source Code" data-lang-id="Source Code">Source Code</span>
                     </a>
                     <a href="#" onclick="showDocs('WiFury')">
                         <i class="fas fa-book"></i>
-                        Documentation
+                        <span data-lang-en="Documentation" data-lang-id="Dokumentasi">Dokumentasi</span>
                     </a>
                 </div>
             </div>
@@ -544,23 +565,23 @@
                     <i class="fas fa-search"></i>
                 </div>
                 <h3 class="tool-title">CVEHunterX</h3>
-                <p class="tool-description">
-                    Powerful vulnerability scanner and CVE hunter for identifying security flaws in systems and applications.
+                <p class="tool-description" data-lang-en="Powerful vulnerability scanner and CVE hunter for identifying security flaws in systems and applications." data-lang-id="Vulnerability scanner yang powerful dan CVE hunter untuk mengidentifikasi kelemahan security di sistem dan aplikasi.">
+                    Vulnerability scanner yang powerful dan CVE hunter untuk mengidentifikasi kelemahan security di sistem dan aplikasi.
                 </p>
                 <ul class="tool-features">
-                    <li>CVE Database Integration</li>
-                    <li>Automated Vulnerability Scanning</li>
-                    <li>Risk Assessment</li>
-                    <li>Detailed Reporting</li>
+                    <li data-lang-en="CVE Database Integration" data-lang-id="CVE Database Integration">CVE Database Integration</li>
+                    <li data-lang-en="Automated Vulnerability Scanning" data-lang-id="Automated Vulnerability Scanning">Automated Vulnerability Scanning</li>
+                    <li data-lang-en="Risk Assessment" data-lang-id="Risk Assessment">Risk Assessment</li>
+                    <li data-lang-en="Detailed Reporting" data-lang-id="Detailed Reporting">Detailed Reporting</li>
                 </ul>
                 <div class="tool-links">
                     <a href="https://github.com/r00tH3x/CVEHunterX" target="_blank">
                         <i class="fab fa-github"></i>
-                        Source Code
+                        <span data-lang-en="Source Code" data-lang-id="Source Code">Source Code</span>
                     </a>
                     <a href="#" onclick="showDocs('CVEHunterX')">
                         <i class="fas fa-book"></i>
-                        Documentation
+                        <span data-lang-en="Documentation" data-lang-id="Dokumentasi">Dokumentasi</span>
                     </a>
                 </div>
             </div>
@@ -571,23 +592,23 @@
                     <i class="fas fa-shield-alt"></i>
                 </div>
                 <h3 class="tool-title">CyberGuard</h3>
-                <p class="tool-description">
-                    Comprehensive security monitoring and protection system with real-time threat detection capabilities.
+                <p class="tool-description" data-lang-en="Comprehensive security monitoring and protection system with real-time threat detection capabilities." data-lang-id="Sistem security monitoring dan protection yang komprehensif dengan kemampuan real-time threat detection.">
+                    Sistem security monitoring dan protection yang komprehensif dengan kemampuan real-time threat detection.
                 </p>
                 <ul class="tool-features">
-                    <li>Real-time Threat Monitoring</li>
-                    <li>Intrusion Detection System</li>
-                    <li>Automated Response</li>
-                    <li>Security Analytics</li>
+                    <li data-lang-en="Real-time Threat Monitoring" data-lang-id="Real-time Threat Monitoring">Real-time Threat Monitoring</li>
+                    <li data-lang-en="Intrusion Detection System" data-lang-id="Intrusion Detection System">Intrusion Detection System</li>
+                    <li data-lang-en="Automated Response" data-lang-id="Automated Response">Automated Response</li>
+                    <li data-lang-en="Security Analytics" data-lang-id="Security Analytics">Security Analytics</li>
                 </ul>
                 <div class="tool-links">
                     <a href="https://github.com/r00tH3x/CyberGuard" target="_blank">
                         <i class="fab fa-github"></i>
-                        Source Code
+                        <span data-lang-en="Source Code" data-lang-id="Source Code">Source Code</span>
                     </a>
                     <a href="#" onclick="showDocs('CyberGuard')">
                         <i class="fas fa-book"></i>
-                        Documentation
+                        <span data-lang-en="Documentation" data-lang-id="Dokumentasi">Dokumentasi</span>
                     </a>
                 </div>
             </div>
@@ -598,23 +619,23 @@
                     <i class="fas fa-eye"></i>
                 </div>
                 <h3 class="tool-title">Sentinel</h3>
-                <p class="tool-description">
-                    Advanced security surveillance and monitoring solution for comprehensive network and system oversight.
+                <p class="tool-description" data-lang-en="Advanced security surveillance and monitoring solution for comprehensive network and system oversight." data-lang-id="Solusi security surveillance dan monitoring canggih untuk oversight jaringan dan sistem yang komprehensif.">
+                    Solusi security surveillance dan monitoring canggih untuk oversight jaringan dan sistem yang komprehensif.
                 </p>
                 <ul class="tool-features">
-                    <li>Network Traffic Analysis</li>
-                    <li>Behavioral Monitoring</li>
-                    <li>Anomaly Detection</li>
-                    <li>Incident Response</li>
+                    <li data-lang-en="Network Traffic Analysis" data-lang-id="Network Traffic Analysis">Network Traffic Analysis</li>
+                    <li data-lang-en="Behavioral Monitoring" data-lang-id="Behavioral Monitoring">Behavioral Monitoring</li>
+                    <li data-lang-en="Anomaly Detection" data-lang-id="Anomaly Detection">Anomaly Detection</li>
+                    <li data-lang-en="Incident Response" data-lang-id="Incident Response">Incident Response</li>
                 </ul>
                 <div class="tool-links">
                     <a href="https://github.com/r00tH3x/Sentinel" target="_blank">
                         <i class="fab fa-github"></i>
-                        Source Code
+                        <span data-lang-en="Source Code" data-lang-id="Source Code">Source Code</span>
                     </a>
                     <a href="#" onclick="showDocs('Sentinel')">
                         <i class="fas fa-book"></i>
-                        Documentation
+                        <span data-lang-en="Documentation" data-lang-id="Dokumentasi">Dokumentasi</span>
                     </a>
                 </div>
             </div>
@@ -625,23 +646,23 @@
                     <i class="fas fa-fish"></i>
                 </div>
                 <h3 class="tool-title">DarkPhish</h3>
-                <p class="tool-description">
-                    Advanced phishing simulation and awareness training platform for security education and testing.
+                <p class="tool-description" data-lang-en="Advanced phishing simulation and awareness training platform for security education and testing." data-lang-id="Platform simulasi phishing canggih dan awareness training untuk security education dan testing.">
+                    Platform simulasi phishing canggih dan awareness training untuk security education dan testing.
                 </p>
                 <ul class="tool-features">
-                    <li>Phishing Campaign Simulation</li>
-                    <li>Social Engineering Testing</li>
-                    <li>Awareness Training</li>
-                    <li>Detailed Analytics</li>
+                    <li data-lang-en="Phishing Campaign Simulation" data-lang-id="Phishing Campaign Simulation">Phishing Campaign Simulation</li>
+                    <li data-lang-en="Social Engineering Testing" data-lang-id="Social Engineering Testing">Social Engineering Testing</li>
+                    <li data-lang-en="Awareness Training" data-lang-id="Awareness Training">Awareness Training</li>
+                    <li data-lang-en="Detailed Analytics" data-lang-id="Detailed Analytics">Detailed Analytics</li>
                 </ul>
                 <div class="tool-links">
                     <a href="https://github.com/r00tH3x/DarkPhish" target="_blank">
                         <i class="fab fa-github"></i>
-                        Source Code
+                        <span data-lang-en="Source Code" data-lang-id="Source Code">Source Code</span>
                     </a>
                     <a href="#" onclick="showDocs('DarkPhish')">
                         <i class="fas fa-book"></i>
-                        Documentation
+                        <span data-lang-en="Documentation" data-lang-id="Dokumentasi">Dokumentasi</span>
                     </a>
                 </div>
             </div>
@@ -652,9 +673,8 @@
     <footer class="footer" id="contact">
         <div class="footer-content">
             <h3 class="footer-title">r00tH3x Security Tools</h3>
-            <p class="footer-description">
-                Empowering cybersecurity professionals with cutting-edge tools and solutions. 
-                Join the community of security researchers and ethical hackers.
+            <p class="footer-description" data-lang-en="Empowering cybersecurity professionals with cutting-edge tools and solutions. Join the community of security researchers and ethical hackers." data-lang-id="Memberdayakan para profesional cybersecurity dengan tools dan solusi terdepan. Bergabunglah dengan komunitas security researchers dan ethical hackers.">
+                Memberdayakan para profesional cybersecurity dengan tools dan solusi terdepan. Bergabunglah dengan komunitas security researchers dan ethical hackers.
             </p>
             <div class="social-links">
                 <a href="https://github.com/r00tH3x" target="_blank">
@@ -671,12 +691,52 @@
                 </a>
             </div>
             <div class="copyright">
-                <p>&copy; 2025 r00tH3x. All rights reserved. Use responsibly and ethically.</p>
+                <p data-lang-en="© 2025 r00tH3x. All rights reserved. Use responsibly and ethically." data-lang-id="© 2025 r00tH3x. All rights reserved. Gunakan dengan bertanggung jawab dan etis.">&copy; 2025 r00tH3x. All rights reserved. Gunakan dengan bertanggung jawab dan etis.</p>
             </div>
         </div>
     </footer>
 
     <script>
+        // Language System
+        const translations = {
+            id: {
+                // Default is already in Indonesian
+            },
+            en: {
+                // English translations will be handled by data attributes
+            }
+        };
+
+        let currentLang = 'id'; // Default Indonesian
+
+        function switchLanguage(lang) {
+            currentLang = lang;
+            const elements = document.querySelectorAll('[data-lang-en][data-lang-id]');
+            
+            elements.forEach(element => {
+                if (lang === 'en') {
+                    element.textContent = element.getAttribute('data-lang-en');
+                } else {
+                    element.textContent = element.getAttribute('data-lang-id');
+                }
+            });
+
+            // Update language selector
+            document.getElementById('languageToggle').value = lang;
+            
+            // Save language preference
+            localStorage.setItem('language', lang);
+        }
+
+        // Language Toggle Event
+        document.getElementById('languageToggle').addEventListener('change', (e) => {
+            switchLanguage(e.target.value);
+        });
+
+        // Load saved language
+        const savedLang = localStorage.getItem('language') || 'id';
+        switchLanguage(savedLang);
+
         // Theme Toggle
         const themeToggle = document.getElementById('themeToggle');
         const themeIcon = document.getElementById('themeIcon');
@@ -707,6 +767,81 @@
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(10, 10, 10, 0.98)';
+                if (body.getAttribute('data-theme') === 'light') {
+                    navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+                }
+            } else {
+                navbar.style.background = 'rgba(10, 10, 10, 0.95)';
+                if (body.getAttribute('data-theme') === 'light') {
+                    navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                }
+            }
+        });
+
+        // Show documentation modal (placeholder function)
+        function showDocs(toolName) {
+            const message = currentLang === 'en' 
+                ? `Documentation for ${toolName} coming soon! Check the GitHub repository for detailed README and usage instructions.`
+                : `Dokumentasi untuk ${toolName} segera hadir! Cek repository GitHub untuk README dan instruksi penggunaan yang lengkap.`;
+            alert(message);
+        }
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Add typing effect to hero title
+        function typeWriter(element, text, speed = 100) {
+            let i = 0;
+            element.innerHTML = '';
+            function typing() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(typing, speed);
+                }
+            }
+            typing();
+        }
+
+        // Initialize typing effect when page loads
+        window.addEventListener('load', () => {
+            const heroTitle = document.querySelector('.hero-title');
+            setTimeout(() => {
+                typeWriter(heroTitle, 'r00tH3x', 150);
+            }, 500);
+        });
+    </script>querySelector(this.getAttribute('href'));
                 if (target) {
                     target.scrollIntoView({
                         behavior: 'smooth',
