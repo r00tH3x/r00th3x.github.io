@@ -4,494 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>r00tH3x - Cybersecurity Tools</title>
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --bg-primary: #0a0a0a;
-            --bg-secondary: #1a1a1a;
-            --bg-card: #222222;
-            --text-primary: #ffffff;
-            --text-secondary: #b3b3b3;
-            --accent-primary: #00ff88;
-            --accent-secondary: #ff0066;
-            --accent-blue: #00aaff;
-            --border: #333333;
-            --shadow: rgba(0, 255, 136, 0.1);
-            --gradient: linear-gradient(135deg, #00ff88, #00aaff);
-        }
-
-        [data-theme="light"] {
-            --bg-primary: #ffffff;
-            --bg-secondary: #f8f9fa;
-            --bg-card: #ffffff;
-            --text-primary: #2d3748;
-            --text-secondary: #718096;
-            --accent-primary: #00b569;
-            --accent-secondary: #e53e3e;
-            --accent-blue: #3182ce;
-            --border: #e2e8f0;
-            --shadow: rgba(0, 181, 105, 0.1);
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
-            transition: all 0.3s ease;
-        }
-
-        /* Navigation */
-        .navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
-
-        [data-theme="light"] .navbar {
-            background: rgba(255, 255, 255, 0.95);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            font-weight: 500;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent-primary);
-            transform: translateY(-2px);
-        }
-
-        .language-toggle {
-            background: var(--bg-card);
-            border: 2px solid var(--border);
-            color: var(--text-primary);
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-            outline: none;
-        }
-
-        .language-toggle:hover {
-            border-color: var(--accent-primary);
-        }
-
-        .theme-toggle {
-            background: none;
-            border: 2px solid var(--border);
-            color: var(--text-primary);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .theme-toggle:hover {
-            border-color: var(--accent-primary);
-            transform: rotate(180deg);
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            background: radial-gradient(circle at 50% 50%, rgba(0, 255, 136, 0.1), transparent 50%);
-        }
-
-        .hero-content {
-            text-align: center;
-            max-width: 800px;
-            padding: 2rem;
-            z-index: 2;
-        }
-
-        .hero-title {
-            font-size: 4rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: glow 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes glow {
-            from { filter: brightness(1); }
-            to { filter: brightness(1.2) drop-shadow(0 0 20px rgba(0, 255, 136, 0.5)); }
-        }
-
-        .hero-subtitle {
-            font-size: 1.5rem;
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            font-weight: 300;
-        }
-
-        .hero-description {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            margin-bottom: 3rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 50px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 1rem;
-        }
-
-        .btn-primary {
-            background: var(--gradient);
-            color: white;
-            box-shadow: 0 10px 30px var(--shadow);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px var(--shadow);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--text-primary);
-            border: 2px solid var(--border);
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--accent-primary);
-            transform: translateY(-3px);
-        }
-
-        /* Tools Grid */
-        .tools-section {
-            padding: 5rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .section-description {
-            text-align: center;
-            color: var(--text-secondary);
-            font-size: 1.2rem;
-            margin-bottom: 4rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .tools-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .tool-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 2rem;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .tool-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .tool-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(0, 255, 136, 0.1);
-            border-color: var(--accent-primary);
-        }
-
-        .tool-card:hover::before {
-            left: 100%;
-        }
-
-        .tool-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--gradient);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
-            color: white;
-        }
-
-        .tool-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-        }
-
-        .tool-description {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-
-        .tool-features {
-            list-style: none;
-            margin-bottom: 2rem;
-        }
-
-        .tool-features li {
-            color: var(--text-secondary);
-            margin-bottom: 0.5rem;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .tool-features li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--accent-primary);
-            font-weight: bold;
-        }
-
-        .tool-links {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .tool-links a {
-            padding: 0.5rem 1rem;
-            background: transparent;
-            border: 1px solid var(--border);
-            border-radius: 25px;
-            text-decoration: none;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .tool-links a:hover {
-            border-color: var(--accent-primary);
-            color: var(--accent-primary);
-            transform: translateY(-2px);
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--bg-secondary);
-            border-top: 1px solid var(--border);
-            padding: 3rem 2rem 2rem;
-            margin-top: 5rem;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .footer-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .footer-description {
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .social-links a {
-            width: 40px;
-            height: 40px;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            border-color: var(--accent-primary);
-            color: var(--accent-primary);
-            transform: translateY(-3px);
-        }
-
-        .copyright {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .hero-title {
-                font-size: 2.5rem;
-            }
-
-            .hero-subtitle {
-                font-size: 1.2rem;
-            }
-
-            .tools-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .tool-links {
-                justify-content: center;
-            }
-        }
-
-        /* Animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeIn 0.8s ease forwards;
-        }
-
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .tool-card:nth-child(1) { animation-delay: 0.1s; }
-        .tool-card:nth-child(2) { animation-delay: 0.2s; }
-        .tool-card:nth-child(3) { animation-delay: 0.3s; }
-        .tool-card:nth-child(4) { animation-delay: 0.4s; }
-        .tool-card:nth-child(5) { animation-delay: 0.5s; }
-    </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loader"></div>
+    </div>
+
+    <div class="bg-animation">
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+    </div>
+
+    <div class="particles" id="particles"></div>
+
+    <header class="navbar">
         <div class="nav-container">
-            <div class="logo">r00tH3x</div>
+            <a href="#home" class="logo">r00tH3x</a>
             <ul class="nav-links">
                 <li><a href="#home" data-lang-en="Home" data-lang-id="Beranda">Beranda</a></li>
                 <li><a href="#tools" data-lang-en="Tools" data-lang-id="Tools">Tools</a></li>
                 <li><a href="#about" data-lang-en="About" data-lang-id="Tentang">Tentang</a></li>
                 <li><a href="#contact" data-lang-en="Contact" data-lang-id="Kontak">Kontak</a></li>
             </ul>
-            <div style="display: flex; gap: 1rem; align-items: center;">
+            <div class="nav-controls">
                 <select class="language-toggle" id="languageToggle">
                     <option value="id">🇮🇩 ID</option>
                     <option value="en">🇺🇸 EN</option>
@@ -501,418 +44,96 @@
                 </button>
             </div>
         </div>
-    </nav>
+    </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-content fade-in">
-            <h1 class="hero-title">r00tH3x</h1>
-            <h2 class="hero-subtitle" data-lang-en="Cybersecurity Enthusiast" data-lang-id="Cybersecurity Antusias">Cybersecurity Antusias</h2>
-            <p class="hero-description" data-lang-en="Professional-grade cybersecurity tools for penetration testing, vulnerability assessment, and security research. Built by security professionals, for security professionals." data-lang-id="Tools cybersecurity tingkat profesional untuk penetration testing, vulnerability assessment, dan security research. Dibuat oleh security professionals, untuk security professionals.">
-                Tools cybersecurity tingkat profesional untuk penetration testing, vulnerability assessment, dan security research. Dibuat oleh security professionals, untuk security professionals.
+    <main>
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <h1 class="hero-title" id="heroTitle"></h1> <h2 class="hero-subtitle" data-lang-en="Cybersecurity Enthusiast" data-lang-id="Pegiat Keamanan Siber">Pegiat Keamanan Siber</h2>
+                <p class="hero-description" data-lang-en="Professional-grade cybersecurity tools for penetration testing, vulnerability assessment, and security research. Built by security professionals, for security professionals." data-lang-id="Tools keamanan siber tingkat profesional untuk uji penetrasi, penilaian kerentanan, dan riset keamanan. Dibuat oleh para profesional keamanan, untuk para profesional keamanan.">
+                    Tools keamanan siber tingkat profesional untuk uji penetrasi, penilaian kerentanan, dan riset keamanan. Dibuat oleh para profesional keamanan, untuk para profesional keamanan.
+                </p>
+                <div class="cta-buttons">
+                    <a href="#tools" class="btn btn-primary">
+                        <i class="fas fa-tools"></i>
+                        <span data-lang-en="Explore Tools" data-lang-id="Jelajahi Tools">Jelajahi Tools</span>
+                    </a>
+                    <a href="https://github.com/r00tH3x" target="_blank" class="btn btn-secondary">
+                        <i class="fab fa-github"></i>
+                        <span data-lang-en="View on GitHub" data-lang-id="Lihat di GitHub">Lihat di GitHub</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="tools-section" id="tools">
+            <h2 class="section-title" data-aos="fade-up" data-lang-en="Security Tools" data-lang-id="Security Tools">Security Tools</h2>
+            <p class="section-description" data-aos="fade-up" data-aos-delay="100" data-lang-en="A comprehensive suite of cybersecurity tools designed for professionals and researchers." data-lang-id="Kumpulan lengkap tools keamanan siber yang dirancang untuk para profesional dan peneliti.">
+                Kumpulan lengkap tools keamanan siber yang dirancang untuk para profesional dan peneliti.
             </p>
-            <div class="cta-buttons">
-                <a href="#tools" class="btn btn-primary">
-                    <i class="fas fa-tools"></i>
-                    <span data-lang-en="Explore Tools" data-lang-id="Jelajahi Tools">Jelajahi Tools</span>
-                </a>
-                <a href="https://github.com/r00tH3x" target="_blank" class="btn btn-secondary">
-                    <i class="fab fa-github"></i>
-                    <span data-lang-en="View on GitHub" data-lang-id="Lihat di GitHub">Lihat di GitHub</span>
-                </a>
-            </div>
-        </div>
-    </section>
+            
+            <div class="tools-grid">
+                <div class="tool-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="tool-icon"><i class="fas fa-wifi"></i></div>
+                    <h3 class="tool-title">WiFury</h3>
+                    <p class="tool-description" data-lang-en="Advanced Wi-Fi security testing toolkit for wireless network assessment." data-lang-id="Toolkit canggih untuk pengujian keamanan Wi-Fi dan penilaian jaringan nirkabel.">
+                        Toolkit canggih untuk pengujian keamanan Wi-Fi dan penilaian jaringan nirkabel.
+                    </p>
+                    <ul class="tool-features">
+                        <li data-lang-en="WPA/WPA2 Security Testing" data-lang-id="Pengujian Keamanan WPA/WPA2">Pengujian Keamanan WPA/WPA2</li>
+                        <li data-lang-en="Wireless Network Scanning" data-lang-id="Pemindaian Jaringan Nirkabel">Pemindaian Jaringan Nirkabel</li>
+                        <li data-lang-en="Automated Attack Vectors" data-lang-id="Vektor Serangan Otomatis">Vektor Serangan Otomatis</li>
+                    </ul>
+                    <div class="tool-links">
+                        <a href="https://github.com/r00tH3x/WiFury" target="_blank"><i class="fab fa-github"></i> <span data-lang-en="Source Code" data-lang-id="Kode Sumber">Kode Sumber</span></a>
+                        <a href="#" onclick="event.preventDefault(); showDocs('WiFury')"><i class="fas fa-book"></i> <span data-lang-en="Documentation" data-lang-id="Dokumentasi">Dokumentasi</span></a>
+                    </div>
+                </div>
 
-    <!-- Tools Section -->
-    <section class="tools-section" id="tools">
-        <h2 class="section-title" data-lang-en="Security Tools" data-lang-id="Security Tools">Security Tools</h2>
-        <p class="section-description" data-lang-en="Comprehensive suite of cybersecurity tools designed for professionals and researchers" data-lang-id="Kumpulan lengkap tools cybersecurity yang dirancang untuk profesional dan peneliti">
-            Kumpulan lengkap tools cybersecurity yang dirancang untuk profesional dan peneliti
-        </p>
+                <div class="tool-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="tool-icon"><i class="fas fa-search"></i></div>
+                    <h3 class="tool-title">CVEHunterX</h3>
+                    <p class="tool-description" data-lang-en="Powerful vulnerability scanner and CVE hunter for identifying security flaws." data-lang-id="Pemindai kerentanan dan pemburu CVE yang kuat untuk mengidentifikasi celah keamanan.">
+                        Pemindai kerentanan dan pemburu CVE yang kuat untuk mengidentifikasi celah keamanan.
+                    </p>
+                    <ul class="tool-features">
+                        <li data-lang-en="CVE Database Integration" data-lang-id="Integrasi Database CVE">Integrasi Database CVE</li>
+                        <li data-lang-en="Automated Scanning" data-lang-id="Pemindaian Otomatis">Pemindaian Otomatis</li>
+                        <li data-lang-en="Detailed Reporting" data-lang-id="Pelaporan Rinci">Pelaporan Rinci</li>
+                    </ul>
+                    <div class="tool-links">
+                        <a href="https://github.com/r00tH3x/CVEHunterX" target="_blank"><i class="fab fa-github"></i> <span data-lang-en="Source Code" data-lang-id="Kode Sumber">Kode Sumber</span></a>
+                        <a href="#" onclick="event.preventDefault(); showDocs('CVEHunterX')"><i class="fas fa-book"></i> <span data-lang-en="Documentation" data-lang-id="Dokumentasi">Dokumentasi</span></a>
+                    </div>
+                </div>
+
+                </div>
+        </section>
         
-        <div class="tools-grid">
-            <!-- WiFury -->
-            <div class="tool-card fade-in">
-                <div class="tool-icon">
-                    <i class="fas fa-wifi"></i>
-                </div>
-                <h3 class="tool-title">WiFury</h3>
-                <p class="tool-description" data-lang-en="Advanced Wi-Fi security testing and penetration testing toolkit for wireless network assessment." data-lang-id="Toolkit canggih untuk Wi-Fi security testing dan penetration testing untuk assessment jaringan wireless.">
-                    Toolkit canggih untuk Wi-Fi security testing dan penetration testing untuk assessment jaringan wireless.
-                </p>
-                <ul class="tool-features">
-                    <li data-lang-en="WPA/WPA2 Security Testing" data-lang-id="WPA/WPA2 Security Testing">WPA/WPA2 Security Testing</li>
-                    <li data-lang-en="Wireless Network Scanning" data-lang-id="Wireless Network Scanning">Wireless Network Scanning</li>
-                    <li data-lang-en="Access Point Analysis" data-lang-id="Access Point Analysis">Access Point Analysis</li>
-                    <li data-lang-en="Automated Attack Vectors" data-lang-id="Automated Attack Vectors">Automated Attack Vectors</li>
-                </ul>
-                <div class="tool-links">
-                    <a href="https://github.com/r00tH3x/WiFury" target="_blank">
-                        <i class="fab fa-github"></i>
-                        <span data-lang-en="Source Code" data-lang-id="Source Code">Source Code</span>
-                    </a>
-                    <a href="#" onclick="showDocs('WiFury')">
-                        <i class="fas fa-book"></i>
-                        <span data-lang-en="Documentation" data-lang-id="Dokumentasi">Dokumentasi</span>
-                    </a>
-                </div>
-            </div>
+        <section id="about" class="about-section">
+            </section>
 
-            <!-- CVEHunterX -->
-            <div class="tool-card fade-in">
-                <div class="tool-icon">
-                    <i class="fas fa-search"></i>
-                </div>
-                <h3 class="tool-title">CVEHunterX</h3>
-                <p class="tool-description" data-lang-en="Powerful vulnerability scanner and CVE hunter for identifying security flaws in systems and applications." data-lang-id="Vulnerability scanner yang powerful dan CVE hunter untuk mengidentifikasi kelemahan security di sistem dan aplikasi.">
-                    Vulnerability scanner yang powerful dan CVE hunter untuk mengidentifikasi kelemahan security di sistem dan aplikasi.
-                </p>
-                <ul class="tool-features">
-                    <li data-lang-en="CVE Database Integration" data-lang-id="CVE Database Integration">CVE Database Integration</li>
-                    <li data-lang-en="Automated Vulnerability Scanning" data-lang-id="Automated Vulnerability Scanning">Automated Vulnerability Scanning</li>
-                    <li data-lang-en="Risk Assessment" data-lang-id="Risk Assessment">Risk Assessment</li>
-                    <li data-lang-en="Detailed Reporting" data-lang-id="Detailed Reporting">Detailed Reporting</li>
-                </ul>
-                <div class="tool-links">
-                    <a href="https://github.com/r00tH3x/CVEHunterX" target="_blank">
-                        <i class="fab fa-github"></i>
-                        <span data-lang-en="Source Code" data-lang-id="Source Code">Source Code</span>
-                    </a>
-                    <a href="#" onclick="showDocs('CVEHunterX')">
-                        <i class="fas fa-book"></i>
-                        <span data-lang-en="Documentation" data-lang-id="Dokumentasi">Dokumentasi</span>
-                    </a>
-                </div>
-            </div>
+    </main>
 
-            <!-- CyberGuard -->
-            <div class="tool-card fade-in">
-                <div class="tool-icon">
-                    <i class="fas fa-shield-alt"></i>
-                </div>
-                <h3 class="tool-title">CyberGuard</h3>
-                <p class="tool-description" data-lang-en="Comprehensive security monitoring and protection system with real-time threat detection capabilities." data-lang-id="Sistem security monitoring dan protection yang komprehensif dengan kemampuan real-time threat detection.">
-                    Sistem security monitoring dan protection yang komprehensif dengan kemampuan real-time threat detection.
-                </p>
-                <ul class="tool-features">
-                    <li data-lang-en="Real-time Threat Monitoring" data-lang-id="Real-time Threat Monitoring">Real-time Threat Monitoring</li>
-                    <li data-lang-en="Intrusion Detection System" data-lang-id="Intrusion Detection System">Intrusion Detection System</li>
-                    <li data-lang-en="Automated Response" data-lang-id="Automated Response">Automated Response</li>
-                    <li data-lang-en="Security Analytics" data-lang-id="Security Analytics">Security Analytics</li>
-                </ul>
-                <div class="tool-links">
-                    <a href="https://github.com/r00tH3x/CyberGuard" target="_blank">
-                        <i class="fab fa-github"></i>
-                        <span data-lang-en="Source Code" data-lang-id="Source Code">Source Code</span>
-                    </a>
-                    <a href="#" onclick="showDocs('CyberGuard')">
-                        <i class="fas fa-book"></i>
-                        <span data-lang-en="Documentation" data-lang-id="Dokumentasi">Dokumentasi</span>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Sentinel -->
-            <div class="tool-card fade-in">
-                <div class="tool-icon">
-                    <i class="fas fa-eye"></i>
-                </div>
-                <h3 class="tool-title">Sentinel</h3>
-                <p class="tool-description" data-lang-en="Advanced security surveillance and monitoring solution for comprehensive network and system oversight." data-lang-id="Solusi security surveillance dan monitoring canggih untuk oversight jaringan dan sistem yang komprehensif.">
-                    Solusi security surveillance dan monitoring canggih untuk oversight jaringan dan sistem yang komprehensif.
-                </p>
-                <ul class="tool-features">
-                    <li data-lang-en="Network Traffic Analysis" data-lang-id="Network Traffic Analysis">Network Traffic Analysis</li>
-                    <li data-lang-en="Behavioral Monitoring" data-lang-id="Behavioral Monitoring">Behavioral Monitoring</li>
-                    <li data-lang-en="Anomaly Detection" data-lang-id="Anomaly Detection">Anomaly Detection</li>
-                    <li data-lang-en="Incident Response" data-lang-id="Incident Response">Incident Response</li>
-                </ul>
-                <div class="tool-links">
-                    <a href="https://github.com/r00tH3x/Sentinel" target="_blank">
-                        <i class="fab fa-github"></i>
-                        <span data-lang-en="Source Code" data-lang-id="Source Code">Source Code</span>
-                    </a>
-                    <a href="#" onclick="showDocs('Sentinel')">
-                        <i class="fas fa-book"></i>
-                        <span data-lang-en="Documentation" data-lang-id="Dokumentasi">Dokumentasi</span>
-                    </a>
-                </div>
-            </div>
-
-            <!-- DarkPhish -->
-            <div class="tool-card fade-in">
-                <div class="tool-icon">
-                    <i class="fas fa-fish"></i>
-                </div>
-                <h3 class="tool-title">DarkPhish</h3>
-                <p class="tool-description" data-lang-en="Advanced phishing simulation and awareness training platform for security education and testing." data-lang-id="Platform simulasi phishing canggih dan awareness training untuk security education dan testing.">
-                    Platform simulasi phishing canggih dan awareness training untuk security education dan testing.
-                </p>
-                <ul class="tool-features">
-                    <li data-lang-en="Phishing Campaign Simulation" data-lang-id="Phishing Campaign Simulation">Phishing Campaign Simulation</li>
-                    <li data-lang-en="Social Engineering Testing" data-lang-id="Social Engineering Testing">Social Engineering Testing</li>
-                    <li data-lang-en="Awareness Training" data-lang-id="Awareness Training">Awareness Training</li>
-                    <li data-lang-en="Detailed Analytics" data-lang-id="Detailed Analytics">Detailed Analytics</li>
-                </ul>
-                <div class="tool-links">
-                    <a href="https://github.com/r00tH3x/DarkPhish" target="_blank">
-                        <i class="fab fa-github"></i>
-                        <span data-lang-en="Source Code" data-lang-id="Source Code">Source Code</span>
-                    </a>
-                    <a href="#" onclick="showDocs('DarkPhish')">
-                        <i class="fas fa-book"></i>
-                        <span data-lang-en="Documentation" data-lang-id="Dokumentasi">Dokumentasi</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
     <footer class="footer" id="contact">
         <div class="footer-content">
             <h3 class="footer-title">r00tH3x Security Tools</h3>
-            <p class="footer-description" data-lang-en="Empowering cybersecurity professionals with cutting-edge tools and solutions. Join the community of security researchers and ethical hackers." data-lang-id="Memberdayakan para profesional cybersecurity dengan tools dan solusi terdepan. Bergabunglah dengan komunitas security researchers dan ethical hackers.">
-                Memberdayakan para profesional cybersecurity dengan tools dan solusi terdepan. Bergabunglah dengan komunitas security researchers dan ethical hackers.
+            <p class="footer-description" data-lang-en="Empowering cybersecurity professionals with cutting-edge tools. Join the community." data-lang-id="Memberdayakan profesional keamanan siber dengan tools canggih. Bergabunglah dengan komunitas.">
+                Memberdayakan profesional keamanan siber dengan tools canggih. Bergabunglah dengan komunitas.
             </p>
             <div class="social-links">
-                <a href="https://github.com/r00tH3x" target="_blank">
-                    <i class="fab fa-github"></i>
-                </a>
-                <a href="#" target="_blank">
-                    <i class="fab fa-twitter"></i>
-                </a>
-                <a href="#" target="_blank">
-                    <i class="fab fa-linkedin"></i>
-                </a>
-                <a href="#" target="_blank">
-                    <i class="fab fa-telegram"></i>
-                </a>
+                <a href="https://github.com/r00tH3x" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="#" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="#" target="_blank" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
             </div>
             <div class="copyright">
-                <p data-lang-en="© 2025 r00tH3x. All rights reserved. Use responsibly and ethically." data-lang-id="© 2025 r00tH3x. All rights reserved. Gunakan dengan bertanggung jawab dan etis.">&copy; 2025 r00tH3x. All rights reserved. Gunakan dengan bertanggung jawab dan etis.</p>
+                <p data-lang-en="© 2025 r00tH3x. All rights reserved. Use responsibly." data-lang-id="© 2025 r00tH3x. Hak cipta dilindungi. Gunakan dengan bertanggung jawab.">&copy; 2025 r00tH3x. Hak cipta dilindungi. Gunakan dengan bertanggung jawab.</p>
             </div>
         </div>
     </footer>
 
-    <script>
-        // Language System
-        const translations = {
-            id: {
-                // Default is already in Indonesian
-            },
-            en: {
-                // English translations will be handled by data attributes
-            }
-        };
-
-        let currentLang = 'id'; // Default Indonesian
-
-        function switchLanguage(lang) {
-            currentLang = lang;
-            const elements = document.querySelectorAll('[data-lang-en][data-lang-id]');
-            
-            elements.forEach(element => {
-                if (lang === 'en') {
-                    element.textContent = element.getAttribute('data-lang-en');
-                } else {
-                    element.textContent = element.getAttribute('data-lang-id');
-                }
-            });
-
-            // Update language selector
-            document.getElementById('languageToggle').value = lang;
-            
-            // Save language preference
-            localStorage.setItem('language', lang);
-        }
-
-        // Language Toggle Event
-        document.getElementById('languageToggle').addEventListener('change', (e) => {
-            switchLanguage(e.target.value);
-        });
-
-        // Load saved language
-        const savedLang = localStorage.getItem('language') || 'id';
-        switchLanguage(savedLang);
-
-        // Theme Toggle
-        const themeToggle = document.getElementById('themeToggle');
-        const themeIcon = document.getElementById('themeIcon');
-        const body = document.body;
-
-        // Check for saved theme preference
-        const savedTheme = localStorage.getItem('theme') || 'dark';
-        if (savedTheme === 'light') {
-            body.setAttribute('data-theme', 'light');
-            themeIcon.className = 'fas fa-sun';
-        }
-
-        themeToggle.addEventListener('click', () => {
-            const currentTheme = body.getAttribute('data-theme');
-            if (currentTheme === 'light') {
-                body.removeAttribute('data-theme');
-                themeIcon.className = 'fas fa-moon';
-                localStorage.setItem('theme', 'dark');
-            } else {
-                body.setAttribute('data-theme', 'light');
-                themeIcon.className = 'fas fa-sun';
-                localStorage.setItem('theme', 'light');
-            }
-        });
-
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Navbar scroll effect
-        window.addEventListener('scroll', () => {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 100) {
-                navbar.style.background = 'rgba(10, 10, 10, 0.98)';
-                if (body.getAttribute('data-theme') === 'light') {
-                    navbar.style.background = 'rgba(255, 255, 255, 0.98)';
-                }
-            } else {
-                navbar.style.background = 'rgba(10, 10, 10, 0.95)';
-                if (body.getAttribute('data-theme') === 'light') {
-                    navbar.style.background = 'rgba(255, 255, 255, 0.95)';
-                }
-            }
-        });
-
-        // Show documentation modal (placeholder function)
-        function showDocs(toolName) {
-            const message = currentLang === 'en' 
-                ? `Documentation for ${toolName} coming soon! Check the GitHub repository for detailed README and usage instructions.`
-                : `Dokumentasi untuk ${toolName} segera hadir! Cek repository GitHub untuk README dan instruksi penggunaan yang lengkap.`;
-            alert(message);
-        }
-
-        // Animate elements on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observe all fade-in elements
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Add typing effect to hero title
-        function typeWriter(element, text, speed = 100) {
-            let i = 0;
-            element.innerHTML = '';
-            function typing() {
-                if (i < text.length) {
-                    element.innerHTML += text.charAt(i);
-                    i++;
-                    setTimeout(typing, speed);
-                }
-            }
-            typing();
-        }
-
-        // Initialize typing effect when page loads
-        window.addEventListener('load', () => {
-            const heroTitle = document.querySelector('.hero-title');
-            setTimeout(() => {
-                typeWriter(heroTitle, 'r00tH3x', 150);
-            }, 500);
-        });
-    </script>querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Navbar scroll effect
-        window.addEventListener('scroll', () => {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 100) {
-                navbar.style.background = 'rgba(10, 10, 10, 0.98)';
-                if (body.getAttribute('data-theme') === 'light') {
-                    navbar.style.background = 'rgba(255, 255, 255, 0.98)';
-                }
-            } else {
-                navbar.style.background = 'rgba(10, 10, 10, 0.95)';
-                if (body.getAttribute('data-theme') === 'light') {
-                    navbar.style.background = 'rgba(255, 255, 255, 0.95)';
-                }
-            }
-        });
-
-        // Show documentation modal (placeholder function)
-        function showDocs(toolName) {
-            alert(`Documentation for ${toolName} coming soon! Check the GitHub repository for detailed README and usage instructions.`);
-        }
-
-        // Animate elements on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observe all fade-in elements
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Add typing effect to hero title
-        function typeWriter(element, text, speed = 100) {
-            let i = 0;
-            element.innerHTML = '';
-            function typing() {
-                if (i < text.length) {
-                    element.innerHTML += text.charAt(i);
-                    i++;
-                    setTimeout(typing, speed);
-                }
-            }
-            typing();
-        }
-
-        // Initialize typing effect when page loads
-        window.addEventListener('load', () => {
-            const heroTitle = document.querySelector('.hero-title');
-            setTimeout(() => {
-                typeWriter(heroTitle, 'r00tH3x', 150);
-            }, 500);
-        });
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
